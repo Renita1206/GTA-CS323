@@ -1,19 +1,10 @@
 #A highways department must inspect its roads for fallen trees. The adjacency matrix stores the lengths of the roads, in miles, that must be inspected in one district. List the different ways in which the odd vertices can be paired. Find the shortest distance that must be travelled in inspecting all the roads in the district, starting, and finishing at the same point. Find the number of ways of pairing these odd vertices.
 
 # Steps (Chinese Postman Problem)
-#   Input graph as Adjacency Matrix
+#   Graph as Adjacency Matrix
 #   Is it Eulerian
 #       If yes then return sum of road lengths
 #       If no then, match all odd vertices -> then find sum of road lengths + duplicated edges (or roads taken twice)
-
-# Graph as Adjacency Matrix
-graph =                [[0, 3, 1, 0, 5, 0], 
-                        [3, 0, 0, 1, 0, 6], 
-                        [1, 0, 0, 0, 2, 0], 
-                        [0, 1, 0, 0, 0, 1], 
-                        [5, 0, 2, 0, 0, 4], 
-                        [0, 6, 0, 1, 4, 0]]; 
-
 
 def sum_edges(graph):
     sum = 0
@@ -30,7 +21,7 @@ def dijktra(graph, source, dest):
     l = len(graph)
     inf = 10000000
     min_sel = inf
-    for i in range(l):
+    for i in range(l):  #initialise the shortest list
         if(i==source):
             shortest[source] = 0 
         else:
@@ -48,10 +39,10 @@ def dijktra(graph, source, dest):
     while(ind!=dest):
         for i in range(l):
             if i not in selected:
-                if(graph[ind][i]!=0):
-                    if((graph[ind][i] + min_sel) < shortest[i]):
+                if(graph[ind][i]!=0): # if edge exists
+                    if((graph[ind][i] + min_sel) < shortest[i]): # check if shorter path than currently selected path
                         shortest[i] = graph[ind][i] + min_sel
-        temp_min = 1000000
+        temp_min = inf
         
         for j in range(l):
             if j not in selected:
@@ -73,7 +64,7 @@ def odd_vertices(graph):
                     degrees[i]+=1
             
     v = [i for i in range(len(degrees)) if degrees[i]%2!=0]
-    print('odds are:',v)
+    print('Odd Vertices are:',v)
     return v
 
 #Function to generate unique pairs for list of given nodes
@@ -134,5 +125,15 @@ def Chinese_Postman(graph):
     added_distance = min(min_sums)
     total = added_distance + sum_edges(graph)
     return total
+
+
+# Graph as Adjacency Matrix
+graph =                [[0, 3, 1, 0, 2, 0], 
+                        [3, 0, 0, 1, 0, 6], 
+                        [1, 0, 0, 0, 2, 0], 
+                        [0, 1, 0, 0, 0, 1], 
+                        [2, 0, 2, 0, 0, 4], 
+                        [0, 6, 0, 1, 4, 0]]; 
+
 
 print("Shortest Distance to Covered: ",Chinese_Postman(graph))

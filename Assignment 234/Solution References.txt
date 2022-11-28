@@ -1,0 +1,14 @@
+https://towardsdatascience.com/chinese-postman-in-python-8b1187a3e5a
+
+geeksforgeeks.org/chinese-postman-route-inspection-set-1-introduction/
+
+Chinese Postman Problem
+1) Is it eulerian?
+2) if yes, then sum of weights (or sum of road lengths)
+else,
+	match all odd vertices, sum of weights + extra weights due to duplicated edges
+
+
+So...a couple of parts - 
+1) Shortest path between odd degree vertices - Dijkstra's?
+2) Find if graph is Eulerian - Fleury/Heirholzer?
